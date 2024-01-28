@@ -1,0 +1,17 @@
+{
+  "name": "monitoring",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "author": "Ummar Ikram",
+  "license": "MIT",
+  "dependencies": {
+    "dilithium-crystals": "^1.0.6",
+    "falcon-crypto": "^1.0.6",
+    "sphincs": "^3.0.4"
+  }
+}
