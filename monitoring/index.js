@@ -1,36 +1,73 @@
-import { dilithium } from 'dilithium-crystals';
+const { dilithium } = require('dilithium-crystals');
+const { falcon } = require('falcon-crypto');
+const { sphincs } = require('sphincs');
 
-const keyPair /*: {privateKey: Uint8Array; publicKey: Uint8Array} */ =
-    await dilithium.keyPair()
-    ;
+async function runDilithium() {
 
-const message /*: Uint8Array */ =
-    new Uint8Array([104, 101, 108, 108, 111, 0]) // "hello"
-    ;
+    const keyPair = await dilithium.keyPair();
 
-/* Combined signatures */
+    const message = new Uint8Array([104, 101, 108, 108, 111, 0]);
 
-const signed /*: Uint8Array */ =
-    await dilithium.sign(message, keyPair.privateKey)
-    ;
+    const signed = await dilithium.sign(message, keyPair.privateKey);
 
-const verified /*: Uint8Array */ =
-    await dilithium.open(signed, keyPair.publicKey) // same as message
-    ;
+    const verified = await dilithium.open(signed, keyPair.publicKey);
 
-/* Detached signatures */
+    const signature = await dilithium.signDetached(message, keyPair.privateKey);
 
-const signature /*: Uint8Array */ =
-    await dilithium.signDetached(message, keyPair.privateKey)
-    ;
+    const isValid = await dilithium.verifyDetached(signature, message, keyPair.publicKey);
 
-const isValid /*: boolean */ =
-    await dilithium.verifyDetached(signature, message, keyPair.publicKey) // true
-    ;
+    console.log(keyPair);
+    console.log(message);
+    console.log(signed);
+    console.log(verified);
+    console.log(signature);
+    console.log(isValid);
+}
 
-console.log(keyPair);
-console.log(message);
-console.log(signed);
-console.log(verified);
-console.log(signature);
-console.log(isValid);
+async function runFalcon() {
+
+    const keyPair = await falcon.keyPair();
+
+    const message = new Uint8Array([104, 101, 108, 108, 111, 0]);
+
+    const signed = await falcon.sign(message, keyPair.privateKey);
+
+    const verified = await falcon.open(signed, keyPair.publicKey);
+
+    const signature = await falcon.signDetached(message, keyPair.privateKey);
+
+    const isValid = await falcon.verifyDetached(signature, message, keyPair.publicKey);
+
+    console.log(keyPair);
+    console.log(message);
+    console.log(signed);
+    console.log(verified);
+    console.log(signature);
+    console.log(isValid);
+}
+
+async function runSphincs() {
+
+    const keyPair = await sphincs.keyPair();
+
+    const message = new Uint8Array([104, 101, 108, 108, 111, 0]);
+
+    const signed = await sphincs.sign(message, keyPair.privateKey);
+
+    const verified = await sphincs.open(signed, keyPair.publicKey);
+
+    const signature = await sphincs.signDetached(message, keyPair.privateKey);
+
+    const isValid = await sphincs.verifyDetached(signature, message, keyPair.publicKey);
+
+    console.log(keyPair);
+    console.log(message);
+    console.log(signed);
+    console.log(verified);
+    console.log(signature);
+    console.log(isValid);
+}
+
+runFalcon()
+runDilithium()
+runSphincs()
