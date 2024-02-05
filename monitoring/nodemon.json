@@ -1,0 +1,10 @@
+{
+    "watch": [
+        "*.ts"
+    ],
+    "ext": "js,ts,html,json",
+    "ignore": [
+        "out/*"
+    ],
+    "exec": "ts-node --transpile-only index.ts"
+}

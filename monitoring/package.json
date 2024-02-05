@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js"
+    "build": "npx tsc",
+    "start": "node out/index.js",
+    "dev": "nodemon"
   },
   "author": "Ummar Ikram",
   "license": "MIT",
@@ -13,5 +14,10 @@
     "dilithium-crystals": "^1.0.6",
     "falcon-crypto": "^1.0.6",
     "sphincs": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   }
 }
