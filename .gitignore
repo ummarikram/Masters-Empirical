@@ -1,4 +1,2 @@
-tools
-monitoring/node_modules
-monitoring/out
-dataset
+monitoring/
+*.docx
